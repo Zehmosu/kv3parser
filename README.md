@@ -2,6 +2,14 @@
 
 A Python parser for converting KV3 (KeyValues3) data format to JSON, built for data analysis in the game Deadlock.
 
+## Installation
+
+You can install kv3parser using pip:
+
+```
+pip install kv3parser
+```
+
 ## Overview
 
 This project provides a robust parser that can read KV3 formatted data from .vdata files and convert it to JSON. KV3 is a data format used in some Valve games and tools, including Deadlock. By converting KV3 to JSON, this parser facilitates easier analysis and manipulation of game data using standard JSON tools and libraries.
@@ -21,7 +29,7 @@ This project provides a robust parser that can read KV3 formatted data from .vda
 
 ```python
 import json
-from kv3parser import KV3Parser
+from kv3parser import kv3_to_json
 
 # Path to your .vdata file
 vdata_file_path = 'path/to/your/file.vdata'
@@ -30,24 +38,29 @@ vdata_file_path = 'path/to/your/file.vdata'
 with open(vdata_file_path, 'r', encoding='utf-8') as file:
     vdata_content = file.read()
 
-# Parse the KV3 content
-parser = KV3Parser(vdata_content)
 try:
-    parsed_data = parser.parse()
-    
-    # Convert to JSON
-    json_output = json.dumps(parsed_data, indent=2)
+    # Parse the KV3 content
+    json_output = kv3_to_json(vdata_content)
     
     # Print or save the JSON output
     print(json_output)
     
     # Optionally, save to a file
-    # with open('output.json', 'w', encoding='utf-8') as json_file:
-    #     json_file.write(json_output)
+    with open('output.json', 'w', encoding='utf-8') as json_file:
+        json_file.write(json_output)
 
 except Exception as e:
     print(f"Error parsing KV3: {e}")
 ```
+
+This script does the following:
+
+1. Reads a .vdata file (which uses the KV3 format).
+2. Parses the content using `kv3_to_json()`.
+3. Saves the resulting JSON to a file.
+4. Provides an example of how to load the JSON back into a Python dictionary for further processing.
+
+You can easily modify this script to suit your specific needs, such as processing multiple files, extracting specific data, or integrating it into a larger application.
 
 ## Error Handling
 
@@ -71,6 +84,8 @@ The parser is implemented as a `KV3Parser` class with the following key methods:
 - `parse_keyword_or_resource()`: Handles keywords (true, false, null) and resource strings
 
 The parser also includes methods for skipping whitespace and comments, and for parsing keys with potential flags.
+
+The `kv3_to_json()` function provides a convenient wrapper around the `KV3Parser` class, making it easy to convert KV3 content to JSON with a single function call.
 
 ## Dependencies
 
