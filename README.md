@@ -58,7 +58,6 @@ This script does the following:
 1. Reads a .vdata file (which uses the KV3 format).
 2. Parses the content using `kv3_to_json()`.
 3. Saves the resulting JSON to a file.
-4. Provides an example of how to load the JSON back into a Python dictionary for further processing.
 
 You can easily modify this script to suit your specific needs, such as processing multiple files, extracting specific data, or integrating it into a larger application.
 
